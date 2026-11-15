@@ -1,0 +1,25 @@
+{
+  "manifestVersion": 1,
+  "id": "factory.spdw.psbbv.applications",
+  "name": "PSBBV Applications",
+  "version": "0.1.0",
+  "apiVersion": "1.0",
+  "description": "Installed application discovery, package inspection and confirmed application management for PSBBV.",
+  "category": "applications",
+  "platforms": [
+    "psvita"
+  ],
+  "capabilities": [
+    "applications.catalog.read",
+    "applications.package.inspect",
+    "applications.install.manage"
+  ],
+  "permissions": [
+    "network.client",
+    "storage.private"
+  ],
+  "availability": "planned",
+  "runtime": {
+    "kind": "builtin"
+  }
+}
