@@ -35,6 +35,12 @@ PSBBV Applications is the application catalogue and management node. It presents
 
 Malformed catalogue/package tests, path traversal and signature/integrity checks, transaction-state tests, VitaSDK build and physical install/update/uninstall validation. CI packaging is not proof that a package installs correctly on a Vita.
 
-## Status
+## Current implementation status
 
-Repository bootstrap and product boundary only. Planned features are not yet implemented. English UI/docs and SPDW Factory identity are required.
+The repository currently contains a PSBBV node manifest, a pinned copy of the Core node-manifest schema, and CI validation for the manifest contract. The validator checks the current manifest and negative schema fixtures, including bounded capability and permission declarations.
+
+The application catalogue, installed-app discovery, package inspection, package verification, and install/update/uninstall workflows are **not implemented yet**. The manifest declares the node as `planned`; it must not be interpreted as evidence that those capabilities are available.
+
+See [Manifest validation](docs/VALIDATION.md) and [schema provenance](schemas/README.md) for the contract checks and their upstream source.
+
+English UI/docs and SPDW Factory identity are required.
