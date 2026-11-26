@@ -1,0 +1,222 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://spdwfactory.example/schemas/psbbv-application-catalogue.schema.json",
+  "title": "PSBBV Applications Catalogue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "catalogue_id",
+    "generated_at",
+    "source",
+    "applications"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "catalogue_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]{2,63}$"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "url",
+        "trust"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "trust": {
+          "enum": [
+            "signed",
+            "pinned",
+            "manual-review"
+          ]
+        },
+        "manifest_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "applications": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "$ref": "#/$defs/application"
+      }
+    }
+  },
+  "$defs": {
+    "package": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "url",
+        "size_bytes",
+        "sha256",
+        "format"
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "size_bytes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2147483648
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "format": {
+          "enum": [
+            "vpk",
+            "zip"
+          ]
+        }
+      }
+    },
+    "application": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "version",
+        "status",
+        "platform",
+        "category"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]{1,63}$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 96
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 32
+        },
+        "status": {
+          "enum": [
+            "approved",
+            "planned",
+            "deprecated"
+          ]
+        },
+        "platform": {
+          "enum": [
+            "psvita",
+            "psp",
+            "ps1",
+            "multi"
+          ]
+        },
+        "category": {
+          "enum": [
+            "utility",
+            "emulator",
+            "game",
+            "media",
+            "development",
+            "accessibility"
+          ]
+        },
+        "title_id": {
+          "type": "string",
+          "pattern": "^[A-Z0-9]{9}$"
+        },
+        "publisher": {
+          "type": "string",
+          "maxLength": 96
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 800
+        },
+        "tags": {
+          "type": "array",
+          "maxItems": 16,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32
+          }
+        },
+        "minimum_firmware": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+(?:\\.\\d+)?$"
+        },
+        "package": {
+          "$ref": "#/$defs/package"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "approved"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "package"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "planned",
+                  "deprecated"
+                ]
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "not": {
+              "required": [
+                "package"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

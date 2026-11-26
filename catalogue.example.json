@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "catalogue_id": "psbbv-homebrew-fixture",
+  "generated_at": "2026-11-26T00:00:00Z",
+  "source": {
+    "id": "local-fixture",
+    "url": "https://catalogue.example.invalid/psbbv/applications.json",
+    "trust": "manual-review"
+  },
+  "applications": []
+}
