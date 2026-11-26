@@ -37,10 +37,10 @@ Malformed catalogue/package tests, path traversal and signature/integrity checks
 
 ## Current implementation status
 
-The repository currently contains a PSBBV node manifest, a pinned copy of the Core node-manifest schema, and CI validation for the manifest contract. The validator checks the current manifest and negative schema fixtures, including bounded capability and permission declarations.
+The repository now contains a validated PSBBV node manifest plus a separate application-catalogue schema and empty fixture. CI validates node capabilities/permissions, catalogue source trust, approved-package requirements, HTTPS-only URLs, bounded package size and unique application/title IDs.
 
-The application catalogue, installed-app discovery, package inspection, package verification, and install/update/uninstall workflows are **not implemented yet**. The manifest declares the node as `planned`; it must not be interpreted as evidence that those capabilities are available.
+The catalogue metadata contract is implemented; installed-app discovery, live catalogue providers, package inspection, package verification, and install/update/uninstall workflows are **not implemented yet**. The manifest declares the node as `planned`; it must not be interpreted as evidence that those capabilities are available.
 
-See [Manifest validation](docs/VALIDATION.md) and [schema provenance](schemas/README.md) for the contract checks and their upstream source.
+See [Manifest validation](docs/VALIDATION.md), [Application catalogue contract](docs/APPLICATION_CATALOGUE.md) and [schema provenance](schemas/README.md) for the contract checks and their upstream source.
 
 English UI/docs and SPDW Factory identity are required.
