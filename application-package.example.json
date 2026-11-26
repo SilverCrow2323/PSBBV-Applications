@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "packageId": "org.example.utility",
+  "name": "Example Utility",
+  "version": "1.0.0",
+  "titleId": "EXMP00001",
+  "source": "https://example.org/releases/example.vpk",
+  "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "sizeBytes": 4096,
+  "minimumFirmware": "3.60",
+  "category": "utility",
+  "permissions": [
+    "system.metadata.read"
+  ],
+  "files": [
+    {
+      "path": "app/EXMP00001/eboot.bin",
+      "sizeBytes": 2048,
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    {
+      "path": "app/EXMP00001/sce_sys/param.sfo",
+      "sizeBytes": 256,
+      "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  ]
+}

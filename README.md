@@ -22,6 +22,12 @@ PSBBV Applications is the application catalogue and management node. It presents
 - Verify package identity, title ID, size and integrity before installation.
 - Do not host or redistribute proprietary applications, keys or copyrighted payloads.
 
+## Package inspection contract
+
+`application-package.example.json` demonstrates the versioned metadata inspected before a package can be offered for installation. The schema requires a title ID, HTTPS source, package SHA-256, declared size, minimum firmware and per-file hashes. The validator rejects traversal, absolute paths, duplicate entries and file-size totals larger than the package. This milestone validates metadata only: it does not download, install, overwrite or remove applications.
+
+Run the host checks with `python -m pip install jsonschema==4.25.1` followed by `python -m unittest discover -s tests -p 'test_package_manifest.py'` and `python tests/validate_package.py`.
+
 ## Delivery order
 
 1. Define application metadata schema and trusted catalogue source format.
